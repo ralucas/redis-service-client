@@ -1,6 +1,6 @@
 {
   "name": "redis-service-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Service client for Redis",
   "main": "index.js",
   "scripts": {
