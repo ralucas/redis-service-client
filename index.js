@@ -5,7 +5,7 @@ var Q = require('q');
 function RedisService(config) {
   this.config = assign({
     port: 6379,
-    hostname: '127.0.0.1',
+    host: '127.0.0.1',
     options: {}
   }, config);
 
@@ -15,7 +15,7 @@ function RedisService(config) {
     if (config && config.path) {
       this.client = redis.createClient(config.path);
     } else {
-      this.client = redis.createClient(this.config.port, this.config.hostname, this.config.options);
+      this.client = redis.createClient(this.config.port, this.config.host, this.config.options);
     }
   }
   if (config && config.password) this.client.auth(config.password);
