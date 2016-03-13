@@ -23,7 +23,7 @@ function RedisService(config) {
   this.client.on('error', console.warn);
 
   //set up monitoring for redis
-  this.monitorClient = redis.createClient();
+  this.monitorClient = redis.createClient(this.config.port, this.config.host, this.config.options);
 
   this.monitorClient.monitor(function (err, res) {
     if (err) console.error('Error with monitoring mode: ', err, err.stack);
