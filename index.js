@@ -41,7 +41,11 @@ RedisService.prototype.execute = function(method, args) {
 };
 
 RedisService.prototype.pubsub = function pubsub() {
-  var subscriptionClient = redis.createClient();
+  var subscriptionClient = redis.createClient(
+    this.config.port,
+    this.config.host,
+    this.config.options
+  );
   
   var subscribe = function subscribe(method, args) {
     return Q.npost(subscriptionClient, method, args);
