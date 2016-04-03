@@ -22,6 +22,16 @@ function RedisService(config) {
 
   this.client.on('error', console.warn);
 
+  if (this.config.monitor) {
+    this.monitor();
+  }
+}
+
+RedisService.prototype.execute = function execute(method, args) {
+  return Q.npost(this.client, method, args); 
+};
+
+RedisService.prototype.monitor = function monitor() {
   //set up monitoring for redis
   this.monitorClient = redis.createClient(this.config.port, this.config.host, this.config.options);
 
@@ -33,12 +43,7 @@ function RedisService(config) {
   this.monitorClient.on("monitor", function (time, args) {
     console.log(time + ": " + args);
   });
-
 }
-
-RedisService.prototype.execute = function(method, args) {
-  return Q.npost(this.client, method, args); 
-};
 
 RedisService.prototype.pubsub = function pubsub() {
   var subscriptionClient = redis.createClient(
