@@ -1,10 +1,10 @@
 {
   "name": "redis-service-client",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Service client for Redis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha test/"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "object-assign": "^4.0.1",
     "q": "^1.4.1",
     "redis": "^2.4.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0"
   }
 }
