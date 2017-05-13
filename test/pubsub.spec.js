@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const PubSub = require('../index').pubsub;
 
-describe('RedisService', function() {
+describe('PubSub', function() {
 
   const pubsub = new PubSub();
 
@@ -12,7 +12,9 @@ describe('RedisService', function() {
       assert(pubsub.client);
       done();
     });
+  });
 
+  describe('pubsub activities', function() {
     it('should subscribe', function(done) {
       pubsub.listen('testing', function(ch, msg) {
         assert(msg);
@@ -20,6 +22,15 @@ describe('RedisService', function() {
         done();
       });
       pubsub.publish('testing', 'This is a test');
+    });
+
+    it('should psubscribe', function(done) {
+      pubsub.plisten('*te*', function(pattern, ch, msg) {
+        assert(msg);
+        assert.equal(msg, 'This is a test');
+        done();
+      });
+      pubsub.publish('newtest', 'This is a test');
     });
   });
 });
